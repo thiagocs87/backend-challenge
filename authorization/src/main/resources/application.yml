@@ -1,0 +1,9 @@
+server:
+  port: 8881
+spring:
+  data.mongodb.uri: ${ME_CHALLENGE_AUTH_CONNECTION_DB_URI}
+  redis:
+       host: ${ME_CHALLENGE_AUTH_REDIS_HOST}
+       port: ${ME_CHALLENGE_AUTH_REDIS_PORT}
+me.challenge.jwt.secret: 783291ds
+

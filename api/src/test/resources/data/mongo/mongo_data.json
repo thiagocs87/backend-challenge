@@ -1,0 +1,48 @@
+{
+    "orders" :[
+        {
+            "_id" : "1",
+            "orderId" : "123456",
+            "items" : [
+                {
+                    "description" : "Item A",
+                    "unitPrice" : "10",
+                    "quantity" : 1
+                },
+                {
+                    "description" : "Item B",
+                    "unitPrice" : "5",
+                    "quantity" : 2
+                }
+            ],
+            "totalItems" : 3,
+            "totalPrice" : "20",
+            "status" : [
+                "CREATED"
+            ],
+            "_class" : "com.me.challenge.domain.Order"
+        },
+        {
+            "_id" : "2",
+            "orderId" : "1234567",
+            "items" : [
+                {
+                    "description" : "Item A",
+                    "unitPrice" : "10",
+                    "quantity" : 10
+                },
+                {
+                    "description" : "Item B",
+                    "unitPrice" : "5",
+                    "quantity" : 10
+                }
+            ],
+            "totalItems" : 20,
+            "totalPrice" : "20",
+            "status" : [
+                "CREATED"
+            ],
+            "_class" : "com.me.challenge.domain.Order"
+        }
+    ]
+}

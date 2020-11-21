@@ -1,0 +1,64 @@
+server:
+  undertow:
+    threads:
+      io: 32
+      worker: 512
+  port: ${ME_CHALLENGE_SERVER_PORT}
+  compression:
+    enabled: true
+    mime-types: application/json
+
+management.server.port: ${ME_CHALLENGE_MNG_SERVER_PORT}
+
+me.service.authorization.url: ${ME_CHALLENGE_AUTHORIZATION_URL}
+
+hystrix:
+  command.default:
+    execution.isolation.thread:
+      timeoutInMilliseconds: 5000
+    circuitBreaker.forceClosed: true
+  threadpool.default:
+    maximumSize: 512
+    allowMaximumSizeToDivergeFromCoreSize: true
+
+zuul:
+  ratelimit:
+    enabled: true
+    policy:
+      limit: 1000
+      refresh-interval: 30
+  host:
+    max-total-connections: 10000
+    max-per-route-connections: 10000
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  SendErrorFilter.error.disable: true
+
+spring:
+  application.name: Gateway
+  mvc.async.request-timeout: 5000
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+ribbon.enabled: false
+ribbon.eureka.enabled: false
+eureka.client.enabled: false
+
+management:
+  health:
+    diskspace:
+      enabled: false
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
+      base-path: "/"
+      path-mapping:
+        prometheus: "metrics"
+
+logging.pattern.console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta([%t]) %m%n"

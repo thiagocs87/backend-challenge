@@ -1,0 +1,39 @@
+server:
+  port: ${ME_CHALLENGE_SERVER_PORT}
+spring:
+  application:
+    name: me-challenge
+  data:
+    mongodb:
+      uri: ${ME_CHALLENGE_CONNECTION_DB_URI}
+      auto-index-creation: true
+  eureka:
+    client:
+      service-url:
+        default-zone: ${ME_CHALLENGE_EUREKA_URL}
+      register-with-eureka: true
+      fetch-registry: true
+
+
+me:
+  service.name: api
+  logging:
+    level: info
+    appender: ${ME_CHALLENGE_LOGGING_APPENDER}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    metrics:
+      enabled: false
+    prometheus:
+      enabled: true
+
+logging.pattern.console: "%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta([%t]) %m%n"

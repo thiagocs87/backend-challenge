@@ -1,0 +1,135 @@
+version: '3.4'
+services:
+
+    api.me:
+        container_name: api.me
+        image: adoptopenjdk/openjdk11
+        build:
+            context: ../
+            dockerfile: docker-local/Dockerfile
+            args:
+                app: api
+        env_file:
+            - environment/.envapi
+        depends_on:
+            - mongo.me1
+            - mongo.me2
+        ports:
+            - 9088:8088
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.10
+
+    authorization.me:
+        container_name: authorization.me
+        image: adoptopenjdk/openjdk11
+        build:
+            context: ../
+            dockerfile: docker-local/Dockerfile
+            args:
+                app: authorization
+        env_file:
+            - environment/.envauthorization
+        depends_on:
+            - mongo.me.authorization
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.11
+
+    apigateway.me:
+        container_name: apigateway.me
+        image: adoptopenjdk/openjdk11
+        build:
+            context: ../
+            dockerfile: docker-local/Dockerfile
+            args:
+                app: apigateway
+        env_file:
+            - environment/.envapigateway
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.12
+        ports:
+            - 7000:7000
+
+    mongo.me1:
+        hostname: mongo.me1
+        container_name: mongo.me1
+        image: mongo:latest
+        expose:
+            - 27017
+        ports:
+            - 57017:27017
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.20
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+    mongo.me2:
+        hostname: mongo.me2
+        container_name: mongo.me2
+        image: mongo:latest
+        expose:
+            - 27017
+        ports:
+            - 57018:27017
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.21
+        entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+
+    mongo.me.authorization:
+        container_name: mongo.me.authorization
+        image: mongo:latest
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.14
+        ports:
+            - 47018:27017
+
+    redis.me.authorization:
+        container_name: redis.me.authorization
+        image: redis
+        command: ["redis-server", "--appendonly", "yes"]
+        hostname: redis.me.authorization
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.15
+
+    prometheus.api.me:
+        container_name: prometheus.api.me
+        image: prom/prometheus
+        restart: always
+        volumes:
+            - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        ports:
+            - 9090:9090
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.30
+
+    grafana.me:
+        container_name: grafana.me
+        image: grafana/grafana:latest
+        restart: always
+        depends_on:
+            - api.me
+            - prometheus.api.me
+        volumes:
+            - ./grafana/dashboards/:/var/lib/grafana/dashboards
+            - ./grafana/provisioning/:/etc/grafana/provisioning/
+            - grafana-storage:/var/lib/grafana
+        networks:
+            bubble-me:
+                ipv4_address: 10.70.0.40
+        ports:
+            - 3000:3000
+
+volumes:
+    grafana-storage: {}
+
+networks:
+    bubble-me:
+        driver: bridge
+        ipam:
+            config:
+                -   subnet: 10.70.0.0/16

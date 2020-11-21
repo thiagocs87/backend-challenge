@@ -1,0 +1,10 @@
+spring:
+  application.name: me-challenge
+  data.mongodb.port: 0
+
+  profiles.active: test
+  data:
+    mongodb:
+      port: 0
+      auto-index-creation: true
+

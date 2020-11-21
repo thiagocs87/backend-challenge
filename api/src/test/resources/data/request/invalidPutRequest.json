@@ -1,0 +1,15 @@
+{
+  "pedido":"123456",
+  "itens": [
+    {
+      "descricao": "Item A",
+      "precoUnitario": "x",
+      "qtd": 1
+    },
+    {
+      "descricao": "Item B",
+      "precoUnitario": 5,
+      "qtd": 2
+    }
+  ]
+}
