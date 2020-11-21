@@ -8,6 +8,8 @@ import com.me.challenge.infra.exceptionhandler.CreateOrderException;
 import com.me.challenge.infra.integration.converter.OrderToOrderDtoConverter;
 import com.me.challenge.infra.integration.converter.OrderDtoToOrderConverter;
 import com.me.challenge.infra.integration.dto.OrderDto;
+import com.me.challenge.infra.metrics.MetricsType;
+import com.me.challenge.infra.metrics.OrderMetrics;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository repository;
     private final OrderDtoToOrderConverter dtoConverter;
     private final OrderToOrderDtoConverter orderConverter;
+    private final OrderMetrics metrics;
 
 
     @Override
@@ -34,6 +37,7 @@ public class OrderServiceImpl implements OrderService {
             Order order = dtoConverter.convert(orderDto);
             order.generateNewOrderData();
             repository.save(order);
+            metrics.increment(MetricsType.ORDER_CREATED.toString());
         } catch (DuplicateKeyException ex) {
             throw new CreateOrderException("Pedido já existe na base");
         } catch (Exception e) {
@@ -51,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(final String orderId) {
         Order order = getOrder(orderId).orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
         repository.delete(order);
+        metrics.increment(MetricsType.ORDER_DELETED.toString());
     }
 
     @Override
@@ -66,7 +71,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Optional<Order> getOrder(String orderId) {
+    public Optional<Order> getOrder(final String orderId) {
         return repository.findByOrderId(orderId);
     }
 }

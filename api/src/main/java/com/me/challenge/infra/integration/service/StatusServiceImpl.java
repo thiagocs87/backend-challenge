@@ -5,6 +5,8 @@ import com.me.challenge.domain.OrderStatus;
 import com.me.challenge.domain.validator.Validator;
 import com.me.challenge.infra.integration.converter.StatusDtoToOrderConverter;
 import com.me.challenge.infra.integration.dto.StatusDto;
+import com.me.challenge.infra.metrics.MetricsType;
+import com.me.challenge.infra.metrics.OrderMetrics;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class StatusServiceImpl implements StatusService {
     private final List<Validator> validators;
     private final OrderService service;
     private final StatusDtoToOrderConverter statusDtoToOrderConverter;
+    private final OrderMetrics metrics;
+
 
     @Override
     public StatusDto process(final StatusDto statusDto) {
@@ -57,9 +61,15 @@ public class StatusServiceImpl implements StatusService {
                     .build();
         }
         validatedOrderStatus.remove(OrderStatus.APPROVED);
+        this.incrementMetric(validatedOrderStatus);
         return StatusDto.builder()
                 .listStatus(validatedOrderStatus)
                 .orderId(receivedOrderId)
                 .build();
+    }
+
+    private void incrementMetric(List<OrderStatus> validatedOrderStatus) {
+        MetricsType metricType = validatedOrderStatus.contains(OrderStatus.APPROVED) ? MetricsType.ORDER_APPROVED : validatedOrderStatus.contains(OrderStatus.DISAPPROVED) ? MetricsType.ORDER_DISAPPROVED : MetricsType.ORDER_PARTIALLY_APPROVED;
+        metrics.increment(metricType.toString());
     }
 }

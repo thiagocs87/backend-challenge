@@ -1,0 +1,121 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "description": "DASHBOARD DE PEDIDOS",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "7.3.3",
+      "targets": [
+        {
+          "expr": "ORDER_CREATED_total",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "PEDIDOS CRIADOS",
+          "refId": "A"
+        },
+        {
+          "expr": "ORDER_APPROVED",
+          "interval": "",
+          "legendFormat": "PEDIDOS APROVADOS",
+          "refId": "E"
+        },
+        {
+          "expr": "ORDER_PARTIALLY_APPROVED_total",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "PEDIDOS APROVADOS PARCIALMENTE",
+          "refId": "B"
+        },
+        {
+          "expr": "ORDER_DISAPPROVED",
+          "interval": "",
+          "legendFormat": "PEDIDOS REPROVADOS",
+          "refId": "D"
+        },
+        {
+          "expr": "ORDER_DELETED",
+          "interval": "",
+          "legendFormat": "PEDIDOS APAGADOS",
+          "refId": "C"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "PEDIDOS",
+      "transparent": true,
+      "type": "gauge"
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Mercado Eletronico API - PEDIDOS",
+  "uid": "cTdlnQTMz",
+  "version": 1
+}

@@ -1,6 +1,7 @@
 package com.me.challenge.infra.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -10,12 +11,12 @@ import java.time.LocalDateTime;
  * @version 1.0 18/11/2020
  */
 
+@Getter
 public class ExceptionResponse {
 
     private String errorMessage;
     private String errorCode;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
 
     public void setErrorMessage(String errorMessage) {

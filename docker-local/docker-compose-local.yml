@@ -14,8 +14,6 @@ services:
         depends_on:
             - mongo.me1
             - mongo.me2
-        ports:
-            - 9088:8088
         networks:
             bubble-me:
                 ipv4_address: 10.70.0.10
@@ -56,10 +54,6 @@ services:
         hostname: mongo.me1
         container_name: mongo.me1
         image: mongo:latest
-        expose:
-            - 27017
-        ports:
-            - 57017:27017
         networks:
             bubble-me:
                 ipv4_address: 10.70.0.20
@@ -68,10 +62,6 @@ services:
         hostname: mongo.me2
         container_name: mongo.me2
         image: mongo:latest
-        expose:
-            - 27017
-        ports:
-            - 57018:27017
         networks:
             bubble-me:
                 ipv4_address: 10.70.0.21
@@ -83,8 +73,6 @@ services:
         networks:
             bubble-me:
                 ipv4_address: 10.70.0.14
-        ports:
-            - 47018:27017
 
     redis.me.authorization:
         container_name: redis.me.authorization

@@ -100,8 +100,6 @@ public class OrderIntegrationTests extends AbstractIntegrationTests {
             executionPhase = MongoScript.ExecutionPhase.BEFORE_TEST_METHOD)})
     public void givenAValidPutRequestInput_WhenReceived_ThenShouldPersistAndReturnOk() throws Exception {
 
-        final Order order = repository.findByOrderId("1234567").get();
-
         final String validRequest = getTextPlainFileAsString("data/request/validPutRequest.json");
 
         mockMvc.perform(put(ENDPOINT)
@@ -109,8 +107,8 @@ public class OrderIntegrationTests extends AbstractIntegrationTests {
                 .content(validRequest))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        final Order order1 = repository.findByOrderId("1234567").get();
-        assertEquals(order1.getTotalItems(), 3);
+        final Order order = repository.findByOrderId("1234567").get();
+        assertEquals(order.getTotalItems(), 3);
     }
 
     @Test
