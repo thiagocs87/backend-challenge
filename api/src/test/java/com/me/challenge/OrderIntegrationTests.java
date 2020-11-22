@@ -119,7 +119,7 @@ public class OrderIntegrationTests extends AbstractIntegrationTests {
         mockMvc.perform(put(ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(validRequest))
-                .andExpect(MockMvcResultMatchers.status().isInternalServerError());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test

@@ -8,6 +8,5 @@ package com.me.challenge.infra.metrics;
 public interface Metrics {
 
     void increment(final String key);
-    void decrement(final String key);
 
 }

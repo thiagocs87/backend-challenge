@@ -52,12 +52,10 @@ public class StatusServiceImpl implements StatusService {
     }
 
     private StatusDto buildStatusReturn(final String receivedOrderId, final List<OrderStatus> validatedOrderStatus) {
-        if(validatedOrderStatus.stream().allMatch(status -> status == OrderStatus.APPROVED)) {
-            List<OrderStatus> statuses;
-            statuses = Arrays.asList(OrderStatus.APPROVED);
+        if(validatedOrderStatus.size() == 1) {
             this.incrementMetric(validatedOrderStatus);
             return StatusDto.builder()
-                    .listStatus(statuses)
+                    .listStatus(validatedOrderStatus)
                     .orderId(receivedOrderId)
                     .build();
         }

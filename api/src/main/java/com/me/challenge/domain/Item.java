@@ -28,9 +28,4 @@ public class Item {
     @Positive
     private final int quantity;
 
-    public static void main(String args[]) {
-        Item item = Item.builder().quantity(0).build();
-        System.out.println(item);
-    }
-
 }

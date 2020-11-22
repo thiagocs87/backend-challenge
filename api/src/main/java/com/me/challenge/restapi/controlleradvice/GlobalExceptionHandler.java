@@ -1,6 +1,7 @@
 package com.me.challenge.restapi.controlleradvice;
 
 import com.me.challenge.infra.exceptionhandler.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * @author Thiago Santos
  * @version 1.0 18/11/2020
  */
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -22,6 +24,7 @@ public class GlobalExceptionHandler {
         response.setErrorCode("INTERNAL ERROR");
         response.setErrorMessage(ex.getMessage());
         response.setTimestamp(LocalDateTime.now());
+        this.logException(response);
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -31,6 +34,7 @@ public class GlobalExceptionHandler {
         response.setErrorCode("INTERNAL ERROR");
         response.setErrorMessage(ex.getMessage());
         response.setTimestamp(LocalDateTime.now());
+        this.logException(response);
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -40,6 +44,7 @@ public class GlobalExceptionHandler {
         response.setErrorCode("NOT_FOUND");
         response.setErrorMessage(ex.getMessage());
         response.setTimestamp(LocalDateTime.now());
+        this.logException(response);
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -49,6 +54,7 @@ public class GlobalExceptionHandler {
         response.setErrorCode("BAD_REQUEST");
         response.setErrorMessage(ex.getMessage());
         response.setTimestamp(LocalDateTime.now());
+        this.logException(response);
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.BAD_REQUEST);
     }
 
@@ -58,7 +64,12 @@ public class GlobalExceptionHandler {
         response.setErrorCode("INTERNAL ERROR");
         response.setErrorMessage(ex.getMessage());
         response.setTimestamp(LocalDateTime.now());
+        this.logException(response);
         return new ResponseEntity<ExceptionResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private void logException(ExceptionResponse exception) {
+        log.error("Exception occurred: ErrorMessage {}, OccurredAt {}", exception.getErrorMessage(), exception.getTimestamp());
     }
 
 }

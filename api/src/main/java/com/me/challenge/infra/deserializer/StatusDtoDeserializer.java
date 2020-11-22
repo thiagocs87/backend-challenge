@@ -9,11 +9,8 @@ import com.me.challenge.infra.validator.StatusDtoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import javax.validation.ConstraintViolation;
-import javax.xml.validation.Validator;
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Set;
 
 /**
  * @author Thiago Santos

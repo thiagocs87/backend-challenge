@@ -65,6 +65,8 @@ public class OrderServiceImpl implements OrderService {
             Order savedOrder = getOrder(receivedOrder.getOrderId()).orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado"));
             savedOrder.updateOrderData(receivedOrder);
             repository.save(savedOrder);
+        } catch (ResourceNotFoundException ex){
+            throw ex;
         } catch (Exception ex) {
             throw new UpdateOrderException("Erro ao atualizar pedido");
         }

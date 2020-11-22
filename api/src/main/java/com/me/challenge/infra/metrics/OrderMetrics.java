@@ -14,8 +14,4 @@ public class OrderMetrics implements Metrics {
         System.out.println(metric);
         this.meterRegistry.counter(metric).increment();
     }
-
-    public void decrement(final String metric) {
-        this.meterRegistry.counter(metric).increment();
-    }
 }

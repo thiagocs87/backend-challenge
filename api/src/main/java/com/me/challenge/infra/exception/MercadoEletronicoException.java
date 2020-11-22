@@ -11,8 +11,4 @@ public abstract class MercadoEletronicoException extends RuntimeException {
         super(message);
     }
 
-    protected MercadoEletronicoException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
 }

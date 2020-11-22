@@ -31,30 +31,31 @@ Para iniciar o projeto basta executar o arquivo start-services.sh que está na p
 O projeto utiliza várias variáveis de ambiente que estão definidas em arquivos que são lidos no docker-compose.
 
 ## O que vai subir
-* apigateway.me - serviço responsável por tratar as requisições;
-* authorization.me - microsserviço responsável pela autenticação;
-* api.me - microsserviço que trata dos pedidos;
-* mongo.me.authorization - banco de dados do serviço de autorização
-* redis.me.authorization - redis do serviço de autorização
-* mongo.me1 - banco de dados principal do serviço de api
-* mongo.me2 - replica de leitura do banco de dados principal de api
-* prometheus.api.me - prometheus do projeto
-* grafana.me - grafana do projeto
+* **apigateway.me** - serviço responsável por tratar as requisições;
+* **authorization.me** - microsserviço responsável pela autenticação;
+* **api.me - microsserviço** que trata dos pedidos;
+* **mongo.me.authorization** - banco de dados do serviço de autorização
+* **redis.me.authorization** - redis do serviço de autorização
+* **mongo.me1** - banco de dados principal do serviço de api
+* **mongo.me2** - replica de leitura do banco de dados principal de api
+* **prometheus.api.me** - prometheus do projeto
+* **grafana.me** - grafana do projeto
 
 ## As únicas portas que serão expostas pelo docker são:
-* 7000 - apigateway
-* 3000 - grafana
-* 9090 - prometheus
+* **7000** - apigateway
+* **3000** - grafana
+* **9090** - prometheus
 
 ## Como testar a aplicação
 Foi criada uma collection do postman com todas as requisições relacionadas ao projeto.
 
 ## Passo a passo
-1 - Chamar o endpoint http://localhost:7000/login. Ele aceita requisições do tipo POST.
+1 - Chamar o endpoint **http://localhost:7000/login**. Ele aceita requisições do tipo **POST**.
 
-Header - Content-Type - application/json
+**Header** - Content-Type - application/json
 
-Payload 
+**Payload** 
+
 {
     "login":"mercadoeletronico",
     "password": "123"
@@ -64,13 +65,14 @@ Este usuário foi cadastrado durante a inicialização do projeto.
 
 Este endpoint retornará o token que deverá ser passado para as próximas requisições.
 
-2 - Para testar o endpoint de pedido a rota é http://localhost:7000/api/pedido. Ele aceita os métodos POST, PUT, DELETE e GET.  
+2 - Para testar o endpoint de pedido a rota é http://localhost:7000/api/pedido. Ele aceita os métodos **POST**, **PUT**, **DELETE** e **GET**.  
 
-Header - Content-Type - application/json. 
+**Header** - Content-Type - application/json. 
 
-Header - token - {token gerado no passo 1}. 
+**Header** - token - {token gerado no passo 1}. 
 
-Payload de exemplo
+**Payload de exemplo para requisições POST** e **PUT**
+
 {
   "pedido":"123456",
   "itens": [
@@ -87,13 +89,18 @@ Payload de exemplo
   ]
 }
 
-2 - Para testar o endpoint de status a rota é http://localhost:7000/api/status. Ele aceita apenas o método POST.  
+Para requisições GET e delete o código do pedido deverá ser passado na url conforme exemplo
 
-Header - Content-Type - application/json. 
+http://localhost:7000/api/pedido/ **{codigo do pedido}**
 
-Header - token - {token gerado no passo 1}. 
+2 - Para testar o endpoint de status a rota é http://localhost:7000/api/status. Ele aceita apenas o método **POST**.  
 
-Payload de exemplo. 
+**Header** - Content-Type - application/json. 
+
+**Header** - token - {token gerado no passo 1}. 
+
+**Payload de exemplo** 
+
 {
   "status":"REPROVADO",
   "itensAprovados": 0,
@@ -103,13 +110,22 @@ Payload de exemplo.
 
 3 - Para visualizar o grafana o endereço é http://localhost:3000/
 
-* Usuário: admin
-* Senha: admin
+* **Usuário**: admin
+* **Senha**: admin
 
 Foram disponibilizados dois dashboards:
 
-*  Mercado Eletronico API - JVM - Neste dashboard estão sendo mostradas métricas de JVM da aplicação.
-*  Mercado Eletronico API - PEDIDOS - Neste dashboard estão sendo mostrados os dados relacionados aos pedidos realizados.
+*  **Mercado Eletronico API - JVM** - Neste dashboard estão sendo mostradas métricas de JVM da aplicação.
+
+<p align="center">
+<img src="jvm_grafana.png" align="center" width="600" heigth="300" alt="ME" align="center">
+</p>
+
+*  **Mercado Eletronico API - PEDIDOS** - Neste dashboard estão sendo mostrados os dados relacionados aos pedidos realizados.
+
+<p align="center">
+<img src="grafana.png" align="center" width="600" heigth="300" alt="ME" align="center">
+</p>
 
 ## Ainda pendente de fazer
 *  Criar testes nos microsserviços apigateway e authorization

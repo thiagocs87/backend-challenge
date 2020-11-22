@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.function.BiFunction;
 
+/**
+ *
+ * @author Thiago Santos
+ * @version 1.0 18/11/2020
+ */
 @Component
 public class ItemValidator implements Validator<OrderStatus, Order, Order>{
     @Override
