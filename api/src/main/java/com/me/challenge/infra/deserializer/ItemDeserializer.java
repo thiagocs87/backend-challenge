@@ -5,7 +5,9 @@ import com.me.challenge.domain.Item;
 import com.me.challenge.infra.serializer.SerializationLabels;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 

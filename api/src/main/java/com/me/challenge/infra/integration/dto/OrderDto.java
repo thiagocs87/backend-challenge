@@ -9,6 +9,8 @@ import com.me.challenge.infra.serializer.OrderDtoSerializer;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -22,7 +24,10 @@ import java.util.List;
 @JsonSerialize(using = OrderDtoSerializer.class)
 public class OrderDto {
 
+    @NotNull
     private final String orderId;
+    @NotNull
+    @Valid
     private final List<Item> items;
 
 }

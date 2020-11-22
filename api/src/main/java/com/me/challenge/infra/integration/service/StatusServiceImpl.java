@@ -55,6 +55,7 @@ public class StatusServiceImpl implements StatusService {
         if(validatedOrderStatus.stream().allMatch(status -> status == OrderStatus.APPROVED)) {
             List<OrderStatus> statuses;
             statuses = Arrays.asList(OrderStatus.APPROVED);
+            this.incrementMetric(validatedOrderStatus);
             return StatusDto.builder()
                     .listStatus(statuses)
                     .orderId(receivedOrderId)
@@ -68,8 +69,8 @@ public class StatusServiceImpl implements StatusService {
                 .build();
     }
 
-    private void incrementMetric(List<OrderStatus> validatedOrderStatus) {
-        MetricsType metricType = validatedOrderStatus.contains(OrderStatus.APPROVED) ? MetricsType.ORDER_APPROVED : validatedOrderStatus.contains(OrderStatus.DISAPPROVED) ? MetricsType.ORDER_DISAPPROVED : MetricsType.ORDER_PARTIALLY_APPROVED;
+    private void incrementMetric(final List<OrderStatus> validatedOrderStatus) {
+        MetricsType metricType = validatedOrderStatus.contains(OrderStatus.APPROVED) ? MetricsType.ORDER_APPROVED : validatedOrderStatus.contains(OrderStatus.DISAPPROVED) ? MetricsType.ORDER_DISAPPROVED : MetricsType.ORDER_APPROVED_WITH_DIFFERENCES;
         metrics.increment(metricType.toString());
     }
 }

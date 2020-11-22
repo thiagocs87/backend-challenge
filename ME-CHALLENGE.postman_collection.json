@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "69aaf53d-13f7-4eee-8f1c-c49d3acb048c",
+		"name": "ME-CHALLENGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LOGIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"mercado-eletronico\",\n    \"password\": \"123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CRIAR PEDIDO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXJjYWRvLWVsZXRyb25pY28iLCJleHAiOjE2MDU5NjkzODQsImlhdCI6MTYwNTk1MTM4NH0.zKm98yr7WMjyMpj522kCr1dm0-NGrR4kFWIPrrfXCohVHXWpxHDeNbONC2G8pJzWhEvs8o1DlBNQsGbO_lmy-w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"pedido\":\"1234561111\",\n  \"itens\": [\n  {\n    \"descricao\": \"Item A\",\n    \"precoUnitario\": 10,\n    \"qtd\": 1\n  },\n  {\n    \"descricao\": \"Item B\",\n    \"precoUnitario\": 5,\n    \"qtd\": 2\n  }\n  ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RECUPERAR PEDIDO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXJjYWRvLWVsZXRyb25pY28iLCJleHAiOjE2MDU5NjkzODQsImlhdCI6MTYwNTk1MTM4NH0.zKm98yr7WMjyMpj522kCr1dm0-NGrR4kFWIPrrfXCohVHXWpxHDeNbONC2G8pJzWhEvs8o1DlBNQsGbO_lmy-w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:7000/api/pedido/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"pedido",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALTERAR PEDIDO",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXJjYWRvLWVsZXRyb25pY28iLCJleHAiOjE2MDU5NjkzODQsImlhdCI6MTYwNTk1MTM4NH0.zKm98yr7WMjyMpj522kCr1dm0-NGrR4kFWIPrrfXCohVHXWpxHDeNbONC2G8pJzWhEvs8o1DlBNQsGbO_lmy-w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"pedido\":\"123456\",\n  \"itens\": [\n  {\n    \"descricao\": \"Item A\",\n    \"precoUnitario\": 12,\n    \"qtd\": 1\n  },\n  {\n    \"descricao\": \"Item B\",\n    \"precoUnitario\": 15,\n    \"qtd\": 2\n  }\n  ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/pedido",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"pedido"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ALTERAR STATUS",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXJjYWRvLWVsZXRyb25pY28iLCJleHAiOjE2MDU5NjkzODQsImlhdCI6MTYwNTk1MTM4NH0.zKm98yr7WMjyMpj522kCr1dm0-NGrR4kFWIPrrfXCohVHXWpxHDeNbONC2G8pJzWhEvs8o1DlBNQsGbO_lmy-w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"status\":\"APROVADO\",\n  \"itensAprovados\": 2,\n  \"valorAprovado\": 21,\n  \"pedido\":\"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/api/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APAGAR PEDIDO",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtZXJjYWRvLWVsZXRyb25pY28iLCJleHAiOjE2MDU5NjkzODQsImlhdCI6MTYwNTk1MTM4NH0.zKm98yr7WMjyMpj522kCr1dm0-NGrR4kFWIPrrfXCohVHXWpxHDeNbONC2G8pJzWhEvs8o1DlBNQsGbO_lmy-w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:7000/api/pedido/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"api",
+						"pedido",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

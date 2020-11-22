@@ -8,6 +8,9 @@ import com.me.challenge.infra.serializer.StatusDtoSerializer;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -22,8 +25,13 @@ import java.util.List;
 @JsonSerialize(using = StatusDtoSerializer.class)
 public class StatusDto {
 
+    @NotNull
     private final String orderId;
+    @NotNull
     private final int approvedItems;
+    @NotNull
+    @DecimalMin(value = "0.0")
     private final BigDecimal approvedAmount;
+    @NotNull
     private final List<OrderStatus> listStatus;
 }

@@ -77,10 +77,10 @@
           "refId": "E"
         },
         {
-          "expr": "ORDER_PARTIALLY_APPROVED_total",
+          "expr": "ORDER_APPROVED_WITH_DIFFERENCES_total",
           "instant": true,
           "interval": "",
-          "legendFormat": "PEDIDOS APROVADOS PARCIALMENTE",
+          "legendFormat": "PEDIDOS APROVADOS COM DIFERENÇAS",
           "refId": "B"
         },
         {
