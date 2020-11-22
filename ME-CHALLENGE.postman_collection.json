@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"login\":\"mercado-eletronico\",\n    \"password\": \"123\"\n}"
+					"raw": "{\n    \"login\":\"mercadoeletronico\",\n    \"password\": \"123\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:7000/login",
