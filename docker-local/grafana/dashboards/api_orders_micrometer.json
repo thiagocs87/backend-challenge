@@ -71,6 +71,7 @@
         },
         {
           "expr": "ORDER_DELETED_total",
+          "instant": true,
           "interval": "",
           "legendFormat": "PEDIDOS APAGADOS",
           "refId": "C"
@@ -166,5 +167,5 @@
   "timezone": "",
   "title": "Mercado Eletronico API - PEDIDOS",
   "uid": "cTdlnQTMz",
-  "version": 4
+  "version": 5
 }
