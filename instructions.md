@@ -47,7 +47,9 @@ O projeto utiliza várias variáveis de ambiente que estão definidas em arquivo
 * **9090** - prometheus
 
 ## Como testar a aplicação
-Foi criada uma collection do postman com todas as requisições relacionadas ao projeto.
+Foi criada uma [collection](ME-CHALLENGE.postman_collection.json) no postman com todas as requisições relacionadas ao projeto.
+
+
 
 ## Passo a passo
 1 - Chamar o endpoint **http://localhost:7000/login**. Ele aceita requisições do tipo **POST**.
